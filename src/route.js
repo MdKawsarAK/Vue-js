@@ -22,8 +22,16 @@ import CreateOrder from './pages/orders/create.vue'
 import DeleteOrder from './pages/orders/delete.vue'
 
 import Example from './pages/examples/index.vue'
-
 import Vendor from './pages/vendors/index.vue'
+
+
+
+import index from './pages/employees/index.vue';
+import Create from './pages/employees/Create.vue';
+import Edit from './pages/employees/edit.vue';
+import show from './pages/employees/show.vue';
+
+// Add other page imports here
 
 
 const routes = [
@@ -48,9 +56,23 @@ const routes = [
   { path:'/vendors',component:Vendor},
   { path:'/examples',component:Example},
   
+  {
+    path: '/',
+    redirect: '/employees',
+  },
+  {
+    path: '/employees',component:index,},
+  {
+    path: '/employees/create',component:Create,},
+  {
+    path: '/employees/edit/:id',component:Edit,},
+  {
+    path: '/employees/:id',component: show,
+  },
 
 ]
 
+  
 
 const router = createRouter({
   history: createWebHistory(),
