@@ -65,9 +65,9 @@ const routes = [
   {
     path: '/employees/create',component:Create,},
   {
-    path: '/employees/edit/:id',component:Edit,},
+    path: '/employees/edit/:id',component:Edit, props: true,},
   {
-    path: '/employees/:id',component: show,
+    path: '/employees/:id',component: show, props: true,
   },
 
 ]

@@ -21,7 +21,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { getEmployeeById, updateEmployee, fetchCategories, fetchBloodGroups } from '../services/employeeService';
+import { getEmployeeById, updateEmployee, fetchCategories, fetchBloodGroups } from '../../services/employeeService';
 
 const route = useRoute();
 const router = useRouter();

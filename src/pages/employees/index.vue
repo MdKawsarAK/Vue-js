@@ -91,7 +91,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { fetchEmployeesList, deleteEmployeeById } from '../services/employeeService';
+import { fetchEmployeesList, deleteEmployeeById } from '../../services/employeeService';
 
 const employees = ref([]);
 const search = ref('');

@@ -15,7 +15,7 @@
             <InputField v-model="form.dob" label="Date of Birth" type="date" />
             <InputField v-model="form.hire_date" label="Hire Date" type="date" />
             <InputField v-model="form.salary" label="Salary" type="number" />
-            
+
             <div class="col-md-6 mb-3">
               <label>Gender</label>
               <select class="form-control" v-model="form.gender">
@@ -35,18 +35,24 @@
 
             <div class="col-md-6 mb-3">
               <label>Category</label>
-              <select class="form-control" v-model="form.category_id">
+              <select class="form-control" v-model.number="form.category_id">
                 <option value="">Select</option>
-                <option v-for="cat in categories" :key="cat.id" :value="cat.id">{{ cat.name }}</option>
+                <option v-for="cat in categories" :key="cat.id" :value="Number(cat.id)">
+                  {{ cat.name }}
+                </option>
+
               </select>
+
+
             </div>
 
             <div class="col-md-6 mb-3">
               <label>Blood Group</label>
-              <select class="form-control" v-model="form.blood_id">
+              <select class="form-control" v-model.number="form.blood_id">
                 <option value="">Select</option>
                 <option v-for="blood in bloods" :key="blood.id" :value="blood.id">{{ blood.name }}</option>
               </select>
+
             </div>
 
             <div class="col-md-12 mb-3">
@@ -71,10 +77,12 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { createEmployee, fetchCategories, fetchBloodGroups } from '../../services/employeeService';
 import { useRouter } from 'vue-router';
+import { createEmployee, fetchCategories, fetchBloodGroups } from '../../services/employeeService';
+import InputField from '../../components/InputField.vue'
 
 const router = useRouter();
+
 const form = ref({
   first_name: '',
   last_name: '',
@@ -100,13 +108,41 @@ const onFileChange = (e) => {
 };
 
 const handleSubmit = async () => {
-  const payload = new FormData();
-  for (const key in form.value) {
-    payload.append(key, form.value[key]);
-  }
+  try {
+    const formData = new FormData();
+    formData.append('first_name', form.value.first_name);
+    formData.append('last_name', form.value.last_name);
+    formData.append('email', form.value.email);
+    formData.append('phone', form.value.phone);
+    formData.append('nid', form.value.nid);
+    formData.append('dob', form.value.dob);
+    formData.append('hire_date', form.value.hire_date);
+    formData.append('salary', form.value.salary);
+    formData.append('gender', form.value.gender);
+    formData.append('status', form.value.status);
+    console.log("Selected Category ID:", form.value.category_id);
+    if (form.value.category_id !== '' && form.value.category_id !== null && form.value.category_id !== undefined) {
+      formData.append('category_id', parseInt(form.value.category_id));
+    } else {
+      alert("Please select a valid category.");
+      return; // prevent form submit
+    }
 
-  await createEmployee(payload);
-  router.push('/employees');
+
+
+
+    formData.append('address', form.value.address);
+    if (form.value.photo) {
+      formData.append('photo', form.value.photo);
+    }
+
+    await createEmployee(formData);
+    alert('Employee created successfully!');
+    router.push('/employees');
+  } catch (error) {
+    console.error('API Error:', error);
+    alert(`Failed to create employee: ${error.response?.data?.message || error.message}`);
+  }
 };
 
 onMounted(async () => {
@@ -121,12 +157,24 @@ export default {
     InputField: {
       props: ['modelValue', 'label', 'type'],
       emits: ['update:modelValue'],
+      computed: {
+        name() {
+          return this.label.toLowerCase().replace(/\s+/g, '_'); // e.g., "First Name" => "first_name"
+        }
+      },
       template: `
         <div class="col-md-6 mb-3">
-          <label>{{ label }}</label>
-          <input :type="type || 'text'" class="form-control" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" />
+          <label :for="name">{{ label }}</label>
+          <input 
+            :id="name"
+            :name="name"
+            :type="type || 'text'" 
+            class="form-control" 
+            :value="modelValue" 
+            @input="$emit('update:modelValue', $event.target.value)" 
+          />
         </div>
-      `,
+      `
     },
   },
 };
