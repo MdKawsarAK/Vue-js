@@ -121,12 +121,15 @@ const handleSubmit = async () => {
     formData.append('gender', form.value.gender);
     formData.append('status', form.value.status);
     console.log("Selected Category ID:", form.value.category_id);
-    if (form.value.category_id !== '' && form.value.category_id !== null && form.value.category_id !== undefined) {
-      formData.append('category_id', parseInt(form.value.category_id));
-    } else {
-      alert("Please select a valid category.");
-      return; // prevent form submit
+
+if (form.value.category_id) {
+      formData.append('category_id', form.value.category_id);
     }
+
+    if (form.value.blood_id) {
+      formData.append('blood_id', form.value.blood_id);
+    }
+
 
 
 

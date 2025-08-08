@@ -187,7 +187,7 @@
       <!--begin::Sidebar Brand-->
       <div class="sidebar-brand">
         <!--begin::Brand Link-->
-        <a href="./index.html" class="brand-link">
+        <a href="/" class="brand-link">
           <!--begin::Brand Image-->
           <img src="/assets/dist/assets/img/AdminLTELogo.png" alt="AdminLTE Logo"
             class="brand-image opacity-75 shadow" />
@@ -206,6 +206,15 @@
           <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
 
             <li class="nav-item ">
+              <a href="/" class="nav-link active">
+                <i class="nav-icon bi bi-speedometer"></i>
+                <p>
+                  Dashboard
+                  <i class="nav-arrow bi bi-chevron-right"></i>
+                </p>
+              </a>
+            </li>
+            <li class="nav-item ">
               <a href="#" class="nav-link active">
                 <i class="nav-icon bi bi-speedometer"></i>
                 <p>
@@ -215,13 +224,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <router-link to="/Employeess/create" class="nav-link">
+                  <router-link to="/Employees/create" class="nav-link">
                     <i class="nav-icon bi bi-circle"></i>
                     <p>Create Employee</p>
                   </router-link>
                 </li>
                 <li class="nav-item">
-                  <router-link to="/Employeess" class="nav-link">
+                  <router-link to="/Employees" class="nav-link">
                     <i class="nav-icon bi bi-circle"></i>
                     <p>Manage Employee</p>
                   </router-link>

@@ -23,6 +23,7 @@ import DeleteOrder from './pages/orders/delete.vue'
 
 import Example from './pages/examples/index.vue'
 import Vendor from './pages/vendors/index.vue'
+// import Vendor from './pages/Dashboard/index.vue'
 
 
 
@@ -31,6 +32,11 @@ import Create from './pages/employees/Create.vue';
 import Edit from './pages/employees/edit.vue';
 import show from './pages/employees/show.vue';
 
+ import PayrollInvoiceIndex from "./pages/Accounts/PayrollInvoiceIndex.vue";
+import PayrollInvoiceList from "./pages/Accounts/PayrollInvoiceList.vue";
+import PayrollInvoiceCreate from "./pages/Accounts/PayrollInvoiceCreate.vue";
+// import PayrollInvoiceEdit from "./pages/Accounts/PayrollInvoiceEdit.vue";
+// import PayrollInvoiceView from "./pages/Accounts/PayrollInvoiceView.vue";
 // Add other page imports here
 
 
@@ -70,12 +76,24 @@ const routes = [
     path: '/employees/:id',component: show, props: true,
   },
 
+ 
+
+
+  { path: "/payroll-invoices", component: PayrollInvoiceIndex },
+    { path: "/payroll-invoices", name: "PayrollInvoiceList", component: PayrollInvoiceList },
+  { path: "/payroll-invoices/create", name: "PayrollInvoiceCreate", component: PayrollInvoiceCreate },
+  // { path: "/payroll-invoices/:id/edit", name: "PayrollInvoiceEdit", component: PayrollInvoiceEdit, props: true },
+  // { path: "/payroll-invoices/:id", name: "PayrollInvoiceView", component: PayrollInvoiceView, props: true }
+  // We’ll add create/edit/view later
+
+
+
 ]
 
   
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory('/Projects/Vue/'),
   routes
 })
 
