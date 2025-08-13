@@ -35,9 +35,15 @@ import show from './pages/employees/show.vue';
  import PayrollInvoiceIndex from "./pages/Accounts/PayrollInvoiceIndex.vue";
 import PayrollInvoiceList from "./pages/Accounts/PayrollInvoiceList.vue";
 import PayrollInvoiceCreate from "./pages/Accounts/PayrollInvoiceCreate.vue";
-// import PayrollInvoiceEdit from "./pages/Accounts/PayrollInvoiceEdit.vue";
-// import PayrollInvoiceView from "./pages/Accounts/PayrollInvoiceView.vue";
+import PayrollInvoiceEdit from "./pages/Accounts/PayrollInvoiceEdit.vue";
+import PayrollInvoiceShow from "./pages/Accounts/PayrollInvoiceShow.vue";
 // Add other page imports here
+
+import SalaryIndex from '/src/pages/Salaries/SalaryIndex.vue';
+import SalaryCreate from '/src/pages/Salaries/SalaryCreate.vue';
+import SalaryEdit from '/src/pages/Salaries/SalaryEdit.vue';
+import SalaryShow from '/src/pages/Salaries/SalaryShow.vue';
+// import { SalaryIndex } from '/src/pages/Salaries/SalaryIndex.vue';
 
 
 const routes = [
@@ -82,9 +88,33 @@ const routes = [
   { path: "/payroll-invoices", component: PayrollInvoiceIndex },
     { path: "/payroll-invoices", name: "PayrollInvoiceList", component: PayrollInvoiceList },
   { path: "/payroll-invoices/create", name: "PayrollInvoiceCreate", component: PayrollInvoiceCreate },
-  // { path: "/payroll-invoices/:id/edit", name: "PayrollInvoiceEdit", component: PayrollInvoiceEdit, props: true },
-  // { path: "/payroll-invoices/:id", name: "PayrollInvoiceView", component: PayrollInvoiceView, props: true }
+  { path: "/payroll-invoices/:id/edit", name: "PayrollInvoiceEdit", component: PayrollInvoiceEdit, props: true },
+  { path: "/payroll-invoices/:id", name: "PayrollInvoiceShow", component: PayrollInvoiceShow, props: true },
   // We’ll add create/edit/view later
+
+   {
+    path: '/salaries',
+    name: 'SalaryIndex',
+    component: SalaryIndex,
+  },
+  {
+    path: '/salaries/create',
+    name: 'SalaryCreate',
+    component: SalaryCreate,
+  },
+
+  {
+    path: '/salaries/:id/edit',
+    name: 'SalaryEdit',
+    component: SalaryEdit,
+    props: true,
+  },
+  {
+    path: '/salaries/:id',
+    name: 'SalaryShow',
+    component: SalaryShow,
+    props: true,
+  },
 
 
 

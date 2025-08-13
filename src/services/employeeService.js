@@ -34,3 +34,10 @@ export const fetchCategories = () => {
 export const fetchBloodGroups = () => {
   return axios.get('/api/bloods');
 };
+
+
+export default {
+  getAll() {
+    return axios.get("/api/employees");
+  }
+};

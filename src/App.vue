@@ -331,13 +331,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <router-link to="/customers/create" class="nav-link">
+                  <router-link to="/salaries/create" class="nav-link">
                     <i class="nav-icon bi bi-circle"></i>
                     <p>Salary create</p>
                   </router-link>
                 </li>
                 <li class="nav-item">
-                  <router-link to="/customers" class="nav-link">
+                  <router-link to="/salaries" class="nav-link">
                     <i class="nav-icon bi bi-circle"></i>
                     <p>Manage Salary</p>
                   </router-link>
@@ -355,13 +355,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <router-link to="/customers/create" class="nav-link">
+                  <router-link to="/payroll-invoices/create" class="nav-link">
                     <i class="nav-icon bi bi-circle"></i>
                     <p>Create Employee Bills</p>
                   </router-link>
                 </li>
                 <li class="nav-item">
-                  <router-link to="/customers" class="nav-link">
+                  <router-link to="/payroll-invoices" class="nav-link">
                     <i class="nav-icon bi bi-circle"></i>
                     <p>Employee Bills</p>
                   </router-link>

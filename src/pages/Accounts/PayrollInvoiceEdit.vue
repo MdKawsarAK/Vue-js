@@ -1,6 +1,6 @@
 <template>
   <div class="container mt-4">
-    <h2>Create Payroll Invoice</h2>
+    <h2>Edit Payroll Invoice</h2>
 
     <!-- Payroll Invoice Form -->
     <form @submit.prevent="submitForm">
@@ -65,7 +65,7 @@
       </div>
 
       <!-- Submit Button -->
-      <button type="submit" class="btn btn-success">Create Invoice</button>
+      <button type="submit" class="btn btn-success">Update Invoice</button>
     </form>
   </div>
 </template>
@@ -73,6 +73,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import axios from 'axios'
+import { useRoute, useRouter } from 'vue-router'
 
 // API URL
 const baseUrl = 'http://kawsar.intelsofts.com/Projects/laravel/hr-test/HR/api/'
@@ -87,6 +88,11 @@ const formData = ref({
   status: 'pending', // Default to 'pending'
   items: []  // Array to store payroll items with payroll_item_id and amount
 })
+
+// Get the invoice ID from the route params
+const route = useRoute()
+const router = useRouter()
+const invoiceId = route.params.id
 
 // Calculate the total invoice amount based on the items list
 const invoiceTotal = computed(() => {
@@ -105,9 +111,14 @@ function normalizeResponsePayload(resp) {
   return arr || []
 }
 
-// Fetch employees and payroll items on component mount
+// Fetch invoice, employees, and payroll items data
 onMounted(async () => {
   try {
+    // Fetch invoice data
+    const invoiceRes = await axios.get(`${baseUrl}payroll_invoices/${invoiceId}`)
+    formData.value = invoiceRes.data  // Pre-fill the form with the existing invoice data
+
+    // Fetch employees and payroll items
     const [empRes, itemRes] = await Promise.all([
       axios.get(baseUrl + 'employees'),
       axios.get(baseUrl + 'payroll_items')
@@ -163,18 +174,16 @@ async function submitForm() {
     console.log('Submitting payload:', payload)
 
     // Send data to the API
-    const response = await axios.post(baseUrl + 'payroll_invoices', payload)
+    const response = await axios.put(`${baseUrl}payroll_invoices/${invoiceId}`, payload)
 
     if (response.status === 200 || response.data.success) {
-      alert('Invoice created successfully!')
-      window.location.assign("/payroll-invoices"); 
-      // Optionally redirect to the invoices list page
-      // router.push('/payroll-invoices/')
+      alert('Invoice updated successfully!')
+      router.push("/payroll-invoices") // Redirect to invoices list
     } else {
-      alert('Failed to create invoice. Please try again later.')
+      alert('Failed to update invoice. Please try again later.')
     }
   } catch (err) {
-    console.error('Error creating invoice:', err)
+    console.error('Error updating invoice:', err)
     alert('Error submitting the form. Please try again later.')
   }
 }
